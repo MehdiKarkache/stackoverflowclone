@@ -71,5 +71,8 @@ class QuestionFlowTests extends ApiTestSupport {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.errors.title").exists())
                 .andExpect(jsonPath("$.errors.tags").exists());
+        call(POST, "/api/questions", token, "{pas du json")
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message").value("Corps de requête JSON invalide"));
     }
 }
