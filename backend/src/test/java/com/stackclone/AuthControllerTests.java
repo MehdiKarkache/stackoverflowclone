@@ -24,20 +24,20 @@ class AuthControllerTests {
     void registerLoginAndMe() throws Exception {
         mvc.perform(post("/api/auth/register").contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"username":"alice","email":"alice@test.dev","password":"motdepasse"}"""))
+                                {"username":"authtest","email":"authtest@test.dev","password":"motdepasse"}"""))
                 .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.user.username").value("alice"));
+                .andExpect(jsonPath("$.user.username").value("authtest"));
 
         String body = mvc.perform(post("/api/auth/login").contentType(MediaType.APPLICATION_JSON)
                         .content("""
-                                {"login":"alice@test.dev","password":"motdepasse"}"""))
+                                {"login":"authtest@test.dev","password":"motdepasse"}"""))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
         String token = JsonPath.read(body, "$.token");
 
         mvc.perform(get("/api/auth/me").header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.username").value("alice"));
+                .andExpect(jsonPath("$.username").value("authtest"));
     }
 
     @Test

@@ -43,8 +43,7 @@ public class User {
     }
 
     public void addReputation(int delta) {
-        // La réputation ne descend jamais sous 1, comme sur Stack Overflow
-        this.reputation = Math.max(1, this.reputation + delta);
+        this.reputation += delta;
     }
 
     public Long getId() { return id; }
@@ -53,7 +52,8 @@ public class User {
     public String getPasswordHash() { return passwordHash; }
     public String getBio() { return bio; }
     public void setBio(String bio) { this.bio = bio; }
-    public int getReputation() { return reputation; }
+    /** La réputation affichée ne descend jamais sous 1, comme sur Stack Overflow. */
+    public int getReputation() { return Math.max(1, reputation); }
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }
     public Instant getCreatedAt() { return createdAt; }
