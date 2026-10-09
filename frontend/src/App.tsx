@@ -8,6 +8,9 @@ import LoginPage from './pages/LoginPage'
 import NotFoundPage from './pages/NotFoundPage'
 import QuestionPage from './pages/QuestionPage'
 import RegisterPage from './pages/RegisterPage'
+import TagsPage from './pages/TagsPage'
+import UserPage from './pages/UserPage'
+import UsersPage from './pages/UsersPage'
 
 export default function App() {
   return (
@@ -19,6 +22,9 @@ export default function App() {
             <Route path="questions/:id" element={<QuestionPage />} />
             <Route path="ask" element={<RequireAuth><AskPage /></RequireAuth>} />
             <Route path="questions/:id/edit" element={<RequireAuth><AskPage /></RequireAuth>} />
+            <Route path="tags" element={<TagsPage />} />
+            <Route path="users" element={<UsersPage />} />
+            <Route path="users/:id" element={<UserPage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
             <Route path="*" element={<NotFoundPage />} />
